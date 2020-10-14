@@ -7,7 +7,9 @@
 [Ll]ocal[Cc]ache/
 [Oo]bj/
 [Tt]emp/
-[Uu]nityGenerated/
+[Uu]nity[Gg]enerated/
+[Uu]ser[Ss]ettings/
+[Ll]ogs
 *.stackdump
 
 # Unity3D generated file on Crash Reports
