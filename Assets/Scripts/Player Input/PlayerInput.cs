@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -7,14 +6,13 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	[SerializeField] private Camera _cam;
 
 	private RaycastHit2D _lastDown;
+	private bool _cancelInput;
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		if (CastRay(eventData, out RaycastHit2D hit))
+		if (!_cancelInput && CastRay(eventData.position, out RaycastHit2D hit))
 		{
 			_lastDown = hit;
-			//if (_down.transform.TryGetComponent(out IInteractableDown interactable))
-			//	interactable.OnInteractionDown();
 
 			IInteractableDown interactable = _lastDown.transform.GetComponentInChildren<IInteractableDown>();
 			if (interactable != null)
@@ -24,35 +22,27 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
+		RaycastHit2D hit = new RaycastHit2D();
 		IInteractableUp interactable;
-		if (CastRay(eventData, out RaycastHit2D hit))
+		if (!_cancelInput && CastRay(eventData.position, out hit))
 		{
-			//if (hit.transform.TryGetComponent(out IInteractableUp interactable))
-			//	interactable.OnInteractionUp();
-
-			//if (_down && _down.transform != hit.transform && _down.transform.TryGetComponent(out interactable))
-			//	interactable.OnInteractionUp();
-
 			if ((interactable = hit.transform.GetComponentInChildren<IInteractableUp>()) != null)
 				interactable.OnInteractionUp();
-
 		}
 
-		if (_lastDown && _lastDown.transform != hit.transform
+		if (_lastDown && (!hit || _lastDown.transform != hit.transform)
 			&& (interactable = _lastDown.transform.GetComponentInChildren<IInteractableUp>()) != null)
 			interactable.OnInteractionUp();
 	}
 
-
-	//private bool CastRay(PointerEventData eventData, out RaycastHit hit)
-	//{
-	//	var ray = _cam.ScreenPointToRay(eventData.position);
-	//	return Physics.Raycast(ray, out hit);
-	//}
-	private bool CastRay(PointerEventData eventData, out RaycastHit2D hit)
+	public void SetCancelInput(bool cancelInput)
 	{
-		var ray = _cam.ScreenPointToRay(eventData.position);
-		return hit = Physics2D.GetRayIntersection(ray);
+		_cancelInput = cancelInput;
+	}
+
+	private bool CastRay(Vector2 origin, out RaycastHit2D hit)
+	{
+		return hit = Physics2D.GetRayIntersection(_cam.ScreenPointToRay(origin));
 	}
 
 	private void Awake()
@@ -61,14 +51,6 @@ public class PlayerInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 		{
 			_cam = Camera.main;
 			Debug.LogWarning("Player Input's Camera is not set. Getting Camera with \"MainCamera\" Tag", gameObject);
-		}
-	}
-
-	private void OnValidate()
-	{
-		if (_cam == null)
-		{
-			Debug.LogWarning("Player Input's Camera is not set.", gameObject);
 		}
 	}
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f7e9207e2e74844862584ef0e5cd8b, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  Type: 0
-  Sprite: {fileID: 21300000, guid: e994c3ddeb78a3e4690fcd4f11c858ce, type: 3}
+  _type: 0
+  _sprite: {fileID: 21300000, guid: e994c3ddeb78a3e4690fcd4f11c858ce, type: 3}

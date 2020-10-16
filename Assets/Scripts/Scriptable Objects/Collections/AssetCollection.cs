@@ -11,17 +11,12 @@ public abstract class AssetCollection<T> : ScriptableObject where T : Object
 	public int Length => _collection.Length;
 
 	/// <summary>
-	/// Get an collection item at index.
+	/// Get a collection item at index.
 	/// </summary>
 	/// <param name="index">The index to get item</param>
 	public virtual T GetAt(int index)
 	{
-		if (index >= _collection.Length || index < 0)
-		{
-			Debug.LogWarning("Trying to get an object out of the limit", this);
-		}
-
-		return _collection[Mathf.Clamp(index, 0, _collection.Length - 1)];
+		return _collection[index];
 	}
 
 	/// <summary>
@@ -38,7 +33,13 @@ public abstract class AssetCollection<T> : ScriptableObject where T : Object
 	public virtual T GetRandom(out int index)
 	{
 		index = Random.Range(0, _collection.Length);
-		return GetAt(index);
+		return _collection[index];
+	}
+
+	public T this[int index]
+	{
+		get => _collection[index];
+		set => _collection[index] = value;
 	}
 
 
@@ -55,7 +56,7 @@ public abstract class AssetCollection<T> : ScriptableObject where T : Object
 			for (int i = 0; i < _collection.Length; i++)
 			{
 				if (_collection[i] == null)
-					Debug.LogError($"Object missing or not set on \"{name}\"[{i}]", this);
+					Debug.LogError($"Object missing or not set on \"{name}[{i}]\"", this);
 			}
 		}
 	}

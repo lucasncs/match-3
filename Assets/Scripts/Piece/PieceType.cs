@@ -1,5 +1,5 @@
 ﻿public enum PieceType
 {
-	Normal,
-	Obstacle
+	Normal
+	//Obstacle, Special ...
 }

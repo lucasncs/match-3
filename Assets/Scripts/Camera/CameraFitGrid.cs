@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Camera))]
 public class CameraFitGrid : MonoBehaviour
 {
-	[SerializeField] private Grid _grid;
+	[SerializeField] private GridController _grid;
 	[SerializeField] private float _sizeOffset = 1;
 
 	private void Start()
@@ -28,6 +28,6 @@ public class CameraFitGrid : MonoBehaviour
 	private void Reset()
 	{
 		if (_grid == null)
-			_grid = FindObjectOfType<Grid>();
+			_grid = FindObjectOfType<GridController>();
 	}
 }

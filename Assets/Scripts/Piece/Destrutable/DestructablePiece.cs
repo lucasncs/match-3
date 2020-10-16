@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DestructablePiece : MonoBehaviour
 {
-	public bool IsBeingDestroyed { get; private set; }
-
 	[SerializeField] protected Piece _piece;
+
+	public bool IsBeingDestroyed { get; private set; }
 
 	public void Destroy()
 	{

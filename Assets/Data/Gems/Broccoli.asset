@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f7e9207e2e74844862584ef0e5cd8b, type: 3}
   m_Name: Broccoli
   m_EditorClassIdentifier: 
-  Type: 0
-  Sprite: {fileID: 21300000, guid: e30d84bec6bec0f49a3fab8fdfe5af4c, type: 3}
+  _type: 0
+  _sprite: {fileID: 21300000, guid: e30d84bec6bec0f49a3fab8fdfe5af4c, type: 3}
