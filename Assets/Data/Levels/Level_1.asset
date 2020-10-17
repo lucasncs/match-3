@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f13a10544c75c42abef356772e7a0a, type: 3}
   m_Name: Level_1
   m_EditorClassIdentifier: 
-  _roundDuration: 5
-  _basePoitsGoal: 100
+  _roundDuration: 120
+  _basePoitsGoal: 1500

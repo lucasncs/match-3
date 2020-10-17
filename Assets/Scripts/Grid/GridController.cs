@@ -78,7 +78,7 @@ public class GridController : MonoBehaviour
 			for (int y = 0; y < _ySize; y++)
 			{
 				_pieces[x][y] = CheckIfCreatedMatches(_pieces[x][y]
-					.Init(x,y, _piecesDataCollection.GetRandom(), this));
+					.Init(x, y, _piecesDataCollection.GetRandom(), this));
 			}
 		}
 
@@ -383,14 +383,14 @@ public class GridController : MonoBehaviour
 		return false;
 	}
 
-	private Piece CheckIfCreatedMatches(Piece p)
+	private Piece CheckIfCreatedMatches(Piece piece)
 	{
-		if (GetMatch(p, p.X, p.Y) != null)
+		if (GetMatch(piece, piece.X, piece.Y) != null)
 		{
-			p.Init(p.X, p.Y, _piecesDataCollection.GetRandom(), this);
-			CheckIfCreatedMatches(p);
+			piece.Init(piece.X, piece.Y, _piecesDataCollection.GetRandom(), this);
+			CheckIfCreatedMatches(piece);
 		}
-		return p;
+		return piece;
 	}
 
 	private List<Piece> GetAdjacent(Piece piece)
